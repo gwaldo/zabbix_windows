@@ -75,12 +75,10 @@ else
 	# Back to Chef-land
 	execute "Install Zabbix" do
 		command "#{installdir}\\#{installer} --config #{installdir}\\zabbix_agentd.conf --install"
-		#not_if { File.exists?("#{node['perl']['install_dir']}\\perl\\bin\\perl.exe") }
 	end
 end
 
 # Define zabbix_agentd service
-#service "zabbix_agentd" do
 service "Zabbix Agent" do
   supports :status => true, :start => true, :stop => true, :restart => true
   action [ :enable ]
