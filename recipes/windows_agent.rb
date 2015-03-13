@@ -15,19 +15,11 @@ installer	= "zabbix_agentd#{node['zabbix_windows']['agent']['windows_bitness']}.
 getter		= "zabbix_get#{node['zabbix_windows']['agent']['windows_bitness']}.exe"
 sender		= "zabbix_sender#{node['zabbix_windows']['agent']['windows_bitness']}.exe"
 
-
-#directory node['zabbix_windows']['agent']['include_dir'] do
-#	action :create
-#	recursive true
-#	inherits true
-#end
-
 directory node['zabbix_windows']['log_dir'] do
 	action :create
 	recursive true
 	inherits true
 end
-
 
 cookbook_file "#{installdir}\\#{installer}" do
 	source "#{installer}"
@@ -60,7 +52,6 @@ template "#{installdir}\\zabbix_agentd.conf" do
 	inherits true
 	notifies :restart, "service[Zabbix Agent]"
 end
-
 
 # Check Windows Service
 require 'win32ole'
